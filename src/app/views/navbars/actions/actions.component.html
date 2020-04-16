@@ -1,0 +1,17 @@
+<div (mouseenter)="onHover(true)" (mouseleave)="onHover(false)" class="full">
+
+  <div class="full" (click)="openMenu()">
+    <h4></h4>
+    <h3>Aktionen</h3>
+    <h4></h4>
+  </div>
+  
+  <div class="dropup-content" *ngIf="menuState">
+    <!-- <div class="box" *ngFor="let part of _session.parts; index as i;" [ngClass]="{'bold' : disciplinePart.id == part.id}">
+      <h3>{{getDisciplinePart(part.part_type).name}}</h3>
+      <h4>{{part.number_of_shots}} Schuss/ {{part.sum.text}} Ringe</h4>
+    </div> -->
+    <app-new-target class="box button"></app-new-target>
+  </div>
+  
+</div>

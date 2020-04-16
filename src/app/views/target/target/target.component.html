@@ -1,0 +1,24 @@
+<div id="target_super" style="height: 100%; width: 100%;" (window:resize)="onResize($event)" >
+  <svg [attr.width]="width" [attr.height]="height">
+    <symbol id="target" [attr.viewBox]="viewBox">
+      <svg:g app-background *ngIf="_target" [target]="_target"/>
+      <svg:g app-shot
+        *ngFor="let shot of _series.shots; let i = index"
+        [shot]="shot"
+        [target]="_target"
+        [transparent] = "_selectedShotIndex != i"
+      />
+    </symbol>
+    
+    <symbol id="trialCorner" viewBox="0 0 100 100" preserveAspectRatio="xMaxYMin meet">
+      <svg:polygon
+        points="70 2.5, 97.5 2.5, 97.5 30"
+        [attr.fill]="_target.trial_corner_color.hex"
+        [attr.opacity]="_target.trial_corner_color.alpha"
+      />
+    </symbol>
+    
+    <svg:use xlink:href="#target" />
+    <svg:use *ngIf="has_trial_corner" xlink:href="#trialCorner" />
+  </svg>
+</div>

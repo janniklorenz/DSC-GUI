@@ -1,0 +1,29 @@
+<svg:g *ngIf="_ring">
+  <svg:text
+    [attr.x]="(-_ring.width + fontSizeCorrectionX)"
+    [attr.y]="fontSize*0.3"
+    [attr.font-size]="fontSize"
+    [attr.fill]="_ring.text_color.hex"
+  >{{_ring.value}}</svg:text>
+
+  <svg:text
+    [attr.x]="-_ringWidth + _ring.width + fontSizeCorrectionX"
+    [attr.y]="fontSize*0.3"
+    [attr.font-size]="fontSize"
+    [attr.fill]="_ring.text_color.hex"
+  >{{_ring.value}}</svg:text>
+
+  <svg:text
+    [attr.x]="-fontSize*0.3"
+    [attr.y]="_ringWidth - _ring.width - fontSizeCorrectionY"
+    [attr.font-size]="fontSize"
+    [attr.fill]="_ring.text_color.hex"
+  >{{_ring.value}}</svg:text>
+
+  <svg:text
+    [attr.x]="-fontSize*0.3"
+    [attr.y]="_ring.width - fontSizeCorrectionY"
+    [attr.font-size]="fontSize"
+    [attr.fill]="_ring.text_color.hex"
+  >{{_ring.value}}</svg:text>
+</svg:g>
