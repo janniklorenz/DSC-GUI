@@ -5,7 +5,7 @@
     [ringWidth]="ringWidth"
     [border_width]="border_width"
   />
-  <svg:g ring-circle
+  <svg:g app-ring-circle
     *ngFor="let ring of _target.rings_draw_only.reverse(); let i = index"
     [ring]="ring"
     [border_width]="border_width"

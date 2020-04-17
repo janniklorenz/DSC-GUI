@@ -25,6 +25,7 @@ html, body {
 	margin: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 200;
+	user-select: none;
 	
 	background-color: $base-color;
 }
@@ -49,13 +50,30 @@ h1, h2, h3, h4 {
 }
 
 
-.navbar > * {
+.navbar .navitem {
+	height: 100%;
+	width: 100%;
 	@extend .box;
 }
 .navbar > img {
 	border-radius: 0;
+	border: 0;
 	background-color: $base-color;
 	box-shadow: none;
+}
+
+// Is set to the navitem div if the menu is open
+.navitem-active {
+	position: relative;
+	z-index: 2;
+	@extend .button:hover;
+}
+
+// container of a navitem with its dropup
+.navitem-dropup {
+	height:100%;
+	width:100%;
+	position: relative;
 }
 
 .navbar > * > * {
@@ -174,17 +192,18 @@ h1, h2, h3, h4 {
 	cursor: pointer;
 }
 .navbar .button:hover {
-	border: 1.5px $border-hoover-color solid;
+	border: 1.5px $border-hoover-color solid !important;
 }
-.navbar .button {
-	overflow: visible;
-}
+
+
+
 
 
 
 .full {
 	height:100%;
 	width:100%;
+	position: relative;
 }
 
 
@@ -224,16 +243,21 @@ h1, h2, h3, h4 {
 
 
 
-
-
-
 .dropup-content {
  // display: none;
  position: absolute;
- bottom: 10vmin;
+ bottom: 10vh;
  padding-bottom: 1vmin;
- width: 100%;
  z-index: 2;
+}
+
+.dropup-content-big {
+	position: absolute;
+	width: 200%;
+}
+
+.dropup-content-normal {
+	width: 100%;
 }
 
 .dropup-content > .box {
@@ -263,23 +287,5 @@ h1, h2, h3, h4 {
   top: 0%;
 	background-color: rgba(0, 0, 0, 0.25);
 	z-index: 1;
-	pointer-events: none;
-}
-
-
-
-.navitem-part {
-	position: relative;
-	z-index: 2;
-	
-}
-
-.navitem-part:hover {
-	// position: relative;
-	// z-index: 2;
-	
-	// .dropup-content {
-	//  display: block;
-	//  z-index: 2;
-	// }
+	// pointer-events: none;
 }

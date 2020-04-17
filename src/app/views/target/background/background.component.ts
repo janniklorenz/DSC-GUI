@@ -17,7 +17,5 @@ export class BackgroundComponent {
     this.radius = target.rings[target.rings.length-1].width + 1;
     this.ringWidth = target.rings[1].width - target.rings[0].width;
     this.border_width = this.radius / 400;
-    
-    console.log(target);
   };
 }

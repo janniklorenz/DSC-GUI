@@ -10,20 +10,22 @@ import { DscApiService } from "../../../dsc-api.service";
 })
 export class ActionsComponent implements OnInit {
   
-  @Output()
-  openPartModal = new EventEmitter<boolean>();
-  
-
-  private menuState = false;
-  openMenu() {
-    this.menuState = !this.menuState;
-    this.openPartModal.emit(this.menuState);
+  private menuTitle = "actions";
+  @Output() openMenuChange = new EventEmitter();
+  private _openMenu = false;
+  @Input() set openMenu(event) {
+    if ((event.menuTitle != this.menuTitle && event.state == true) || event.triggerClose == true) {
+      this._openMenu = false;
+    }
   }
-  
-  onHover(state: boolean) {
-    // this.openPartModal.emit(state);
+  toggleMenu() {
+    this._openMenu = !this._openMenu;
+    this.openMenuChange.emit({
+      state: this._openMenu,
+      menuTitle: this.menuTitle,
+      triggerClose: false,
+    });
   }
-
   
 
 

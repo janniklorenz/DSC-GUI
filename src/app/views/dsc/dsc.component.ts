@@ -18,12 +18,12 @@ export class DscComponent implements OnInit {
   session: Session;
   activePart: Part;
   
-  private showPartModal = false
-  private showGrayBackground = false;
-  openPartModal(value) {
-    this.showGrayBackground = value;
-    // this.showPartModal = true;
+  private hasOpenMenu = {state: false, menuTitle: "", triggerClose: false};
+  closeMenu() {
+    this.hasOpenMenu = {state: false, menuTitle: "", triggerClose: true};
   }
+  
+  
 
   constructor(dscAPI: DscApiService) {
     dscAPI.connected.subscribe(connected => console.log("isConnected", connected))
