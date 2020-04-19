@@ -8,20 +8,18 @@ import { Shot, Target, Ring, Color } from "../../../classes/session";
 })
 export class ShotComponent {
   @Input() shot: Shot;
-
-  private _target: Target;
+  @Input() target: Target;
+  @Input() transparent: boolean;
+  
   private ring: Ring;
-  @Input() set target (target: Target) {
-    this._target = target;
-    this.ring = target.rings.filter(ring => ring.value === Math.floor(this.shot.ring))[0];
+  ngOnChanges() {
+    this.ring = this.target.rings.find(ring => ring.value == Math.floor(this.shot.ring));
 
-    this.hit_color = target.default_hit_color;
+    this.hit_color = this.target.default_hit_color;
     if (this.ring) {
       this.hit_color = this.ring.hit_color;
     }
-
-  };
-  @Input() transparent: boolean;
+  }
 
   private hit_color: Color;
 }

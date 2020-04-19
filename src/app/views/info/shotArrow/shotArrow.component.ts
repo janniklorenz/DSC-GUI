@@ -14,7 +14,12 @@ export class ShotArrowComponent {
 
   @Input() set shot(shot: Shot) {
     if (shot.is_inner_ten) {
-      this.arrow = "&#9099;";
+      if (shot.ring_text == "10.9") {
+        this.arrow = "&#9673;";
+      }
+      else {
+        this.arrow = "&#9099;";
+      }
       this.angle = "rotate(" + (-shot.angle - 225) + "deg)";
     }
     else {

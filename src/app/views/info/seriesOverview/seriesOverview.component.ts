@@ -2,10 +2,11 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 import { Session, Part } from "../../../classes/session";
 
+
 @Component({
   selector: 'app-series-overview',
   templateUrl: './seriesOverview.component.html',
-  styleUrls: ['./seriesOverview.component.scss']
+  styleUrls: ['./seriesOverview.component.scss'],
 })
 export class SeriesOverviewComponent {
   

@@ -6,42 +6,27 @@
     <h4>{{discipline.target.title}}</h4>
   </div>
   
-  <div class="dropup-content dropup-content-big" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1vmin" *ngIf="_openMenu">
-    <div class="box button" fxFlex="1 10 calc(33%-1vmin)" (click)="setDiscipline('lg_demo')">
-      <h3>LG Demo</h3>
-    </div>
-    
-    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lp_demo')">
-      <h3>LP Demo</h3>
-    </div>
+  <div class="dropup-content dropup-content-big" [@inOutAnimation] fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1vmin" *ngIf="_openMenu">
     
     <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_training')">
       <h3>LG Training</h3>
     </div>
-    
-    
-    
-    <div class="box button" fxFlex="1 10 calc(33%-1vmin)" (click)="setDiscipline('lg_demo')">
-      <h3>LG Demo</h3>
+    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_wettkampf')">
+      <h3>LG Wettkampf</h3>
     </div>
-    
-    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lp_demo')">
-      <h3>LP Demo</h3>
+    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_finale')">
+      <h3>LG Finale</h3>
     </div>
-    
-    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_training')">
-      <h3>LG Training</h3>
+    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_auflage')">
+      <h3>LG Auflage</h3>
     </div>
     <div class="box button" fxFlex="1 10 calc(33%-1vmin)" (click)="setDiscipline('lg_demo')">
       <h3>LG Demo</h3>
     </div>
     
+    
     <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lp_demo')">
       <h3>LP Demo</h3>
-    </div>
-    
-    <div class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline('lg_training')">
-      <h3>LG Training</h3>
     </div>
     
     

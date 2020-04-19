@@ -7,15 +7,16 @@ import { Target } from "../../../classes/session";
   templateUrl: './background.component.html',
 })
 export class BackgroundComponent {
+  
+  @Input() target: Target;
+  
   private radius: number;
   private border_width: number;
-  private _target: Target;
   private ringWidth: number;
-
-  @Input() set target(target: Target) {
-    this._target = target;
-    this.radius = target.rings[target.rings.length-1].width + 1;
-    this.ringWidth = target.rings[1].width - target.rings[0].width;
+  
+  ngOnChanges() {
+    this.radius = this.target.rings[this.target.rings.length-1].width + 1;
+    this.ringWidth = this.target.rings[1].width - this.target.rings[0].width;
     this.border_width = this.radius / 400;
-  };
+  }
 }

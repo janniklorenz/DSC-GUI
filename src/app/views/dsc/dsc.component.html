@@ -66,6 +66,6 @@
 <app-select-part-modal [hidden]="!showPartModal"></app-select-part-modal>
 
 
-<div class="grayBackground" (click)="closeMenu()" [hidden]="!hasOpenMenu.state">
+<div class="grayBackground" [@inOutAnimation] (click)="closeMenu()" *ngIf="hasOpenMenu.state">
   
 </div>

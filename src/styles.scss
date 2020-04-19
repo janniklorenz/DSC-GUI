@@ -28,11 +28,13 @@ html, body {
 	user-select: none;
 	
 	background-color: $base-color;
+	overflow: hidden;
 }
 
 @media only screen and (max-width: 599px) {
  html {
 	 height: 600px;
+	 overflow: auto;
  }
 }
 
@@ -65,7 +67,7 @@ h1, h2, h3, h4 {
 // Is set to the navitem div if the menu is open
 .navitem-active {
 	position: relative;
-	z-index: 2;
+	z-index: 3;
 	@extend .button:hover;
 }
 
@@ -192,7 +194,7 @@ h1, h2, h3, h4 {
 	cursor: pointer;
 }
 .navbar .button:hover {
-	border: 1.5px $border-hoover-color solid !important;
+	border: 1px $border-hoover-color solid !important;
 }
 
 
@@ -260,21 +262,17 @@ h1, h2, h3, h4 {
 	width: 100%;
 }
 
-.dropup-content > .box {
+.dropup-content .box {
   text-align: center;
   background-color: #fff;
   margin: 1vmin 0 1vmin 0;
   padding: 2vmin 0 2vmin 0;
   font-size: 3vmin;
-	background-color: $box-color;
 	border: 1px $border-color solid;
 	border-radius: $border-radius;
   color: black;
   text-decoration: none;
   display: block;
-}
-.dropup-content p:hover {
-	border: 1.5px $border-hoover-color solid;
 }
 
 
@@ -285,7 +283,9 @@ h1, h2, h3, h4 {
   height: 100%;
 	left: 0%;
   top: 0%;
-	background-color: rgba(0, 0, 0, 0.25);
+	// background-color: rgba(0, 0, 0, 0.3);
+	// background-color: rgba(245, 245, 245, 0.7);
+	background-color: rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	// pointer-events: none;
 }

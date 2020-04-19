@@ -8,46 +8,28 @@ import { Session, Target, Serie } from "../../../classes/session";
 })
 export class TargetComponent implements OnInit {
   
-  _target: Target;
-  @Input() set target(target: Target) {
-    this._target = target;
-    this.calc();
-  }
-  
-  _series: Serie;
-  @Input() set series(series: Serie) {
-    this._series = series;
-    this.calc();
-  }
-  
-  private _selectedShotIndex: number;
-  @Input() set selectedShotIndex(selectedShotIndex: number) {
-    this._selectedShotIndex = selectedShotIndex;
-    this.calc();
-  }
-  
-  
-  
+  @Input() target: Target;
+  @Input() series: Serie;
+  @Input() selectedShotIndex: number;
+
   @Input() has_trial_corner: boolean = false;
 
   @Input() width: string = "200";
   @Input() height: string = "200";
 
   private viewBox: string = "";
-
-
   private radius: number;
   private border_width: number;
   private scale: number;
   
-  private calc() {
-    if (this._target == null) {return}
+  ngOnChanges() {
+    if (this.target == null) {return}
     
-    this.radius = this._target.rings[this._target.rings.length-1].width + 1;
+    this.radius = this.target.rings[this.target.rings.length-1].width + 1;
     this.border_width = this.radius / 400;
 
-    if (this._series != null && this._selectedShotIndex != null) {
-      this.scale = this.calculateScale(this._series, this._target);
+    if (this.series != null && this.selectedShotIndex != null) {
+      this.scale = this.calculateScale(this.series, this.target);
     }
     else {
       this.scale = 1;
@@ -57,7 +39,7 @@ export class TargetComponent implements OnInit {
   }
 
   private calculateScale(series: Serie, target: Target): number {
-    var shot = series.shots[this._selectedShotIndex]; // TODO save selected shot
+    var shot = series.shots[this.selectedShotIndex];
     var zoom = 1;
     if (shot != null) {
       target.rings.every(ring => {

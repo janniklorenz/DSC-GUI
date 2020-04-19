@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DscApiService } from "../../dsc-api.service";
 import { Session, DisciplinePart, Part } from "../../classes/session";
@@ -6,7 +7,28 @@ import { Session, DisciplinePart, Part } from "../../classes/session";
 @Component({
   selector: 'app-dsc',
   templateUrl: './dsc.component.html',
-  styleUrls: ['./dsc.component.scss']
+  styleUrls: ['./dsc.component.scss'],
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ opacity: 0 }),
+            animate('200ms', style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ opacity: 1 }),
+            animate('200ms', style({ opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class DscComponent implements OnInit {
 
