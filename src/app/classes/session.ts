@@ -16,7 +16,7 @@ export class Line {
 }
 
 export class Team {
-  name: number;
+  name: string;
   id: string;
 }
 
@@ -88,7 +88,7 @@ export class DisciplinePart {
   has_trial_corner: boolean;
   id: string;
   main_part: boolean;
-  mane: string;
+  name: string;
   number_of_shots: number;
   series_length: number;
   show_infos: boolean;
@@ -152,4 +152,13 @@ export class Session {
   active_part: string;
   parts: Part[];
   sum: NumberString
+}
+
+
+
+
+export class DSCConfig {
+  default_discipline: Discipline;
+  disciplines: Discipline[];
+  line: Line;
 }

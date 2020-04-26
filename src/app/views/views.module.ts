@@ -4,7 +4,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavbarsModule } from './navbars/navbars.module';
-import { ModalsModule } from './modals/modals.module';
 import { InfoModule } from './info/info.module';
 import { DscComponent } from './dsc/dsc.component';
 import { TargetModule } from './target/target.module';
@@ -17,7 +16,7 @@ import { TargetModule } from './target/target.module';
     CommonModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    NavbarsModule, InfoModule, TargetModule, ModalsModule,
+    NavbarsModule, InfoModule, TargetModule,
   ],
   exports: [
     DscComponent,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DscApiService } from "../../dsc-api.service";
-import { Session, DisciplinePart, Part } from "../../classes/session";
+import { Session, DisciplinePart, Part, DSCConfig} from "../../classes/session";
 
 @Component({
   selector: 'app-dsc',
@@ -38,9 +38,10 @@ export class DscComponent implements OnInit {
   private disciplinePart: DisciplinePart;
   
   session: Session;
+  dscConfig: DSCConfig;
   activePart: Part;
   
-  private hasOpenMenu = {state: false, menuTitle: "", triggerClose: false};
+  hasOpenMenu = {state: false, menuTitle: "", triggerClose: false};
   closeMenu() {
     this.hasOpenMenu = {state: false, menuTitle: "", triggerClose: true};
   }
@@ -50,7 +51,7 @@ export class DscComponent implements OnInit {
   constructor(dscAPI: DscApiService) {
     dscAPI.connected.subscribe(connected => console.log("isConnected", connected))
     dscAPI.session.subscribe(session => {
-      console.log("setSession", session);
+      // console.log("setSession", session);
       
       if (session != null) {
         this.activePart = session.parts[session.active_part];
@@ -61,7 +62,11 @@ export class DscComponent implements OnInit {
       this.session = session;
       
       
-    })
+    });
+    
+    dscAPI.config.subscribe(config => {
+      this.dscConfig = config;
+    });
 	}
   
   getCurrentShot(){

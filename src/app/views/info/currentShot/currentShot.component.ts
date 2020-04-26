@@ -9,8 +9,7 @@ import { Session, Shot } from "../../../classes/session";
 })
 export class CurrentShotComponent {
 
-  @Input()
-  private shot: Shot;
+  @Input() shot: Shot;
 
   constructor() { }
 

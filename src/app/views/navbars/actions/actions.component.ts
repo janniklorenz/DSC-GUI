@@ -34,7 +34,7 @@ export class ActionsComponent implements OnInit {
   
   private menuTitle = "actions";
   @Output() openMenuChange = new EventEmitter();
-  private _openMenu = false;
+  _openMenu = false;
   @Input() set openMenu(event) {
     if ((event.menuTitle != this.menuTitle && event.state == true) || event.triggerClose == true) {
       this._openMenu = false;

@@ -10,17 +10,15 @@ import { Session, Part } from "../../../classes/session";
 })
 export class SeriesOverviewComponent {
   
-  private currentPart: Part;
+  currentPart: Part;
 
   @Input() set session(session: Session) {
     this.currentPart = session.parts[session.active_part];
   }
   
-  @Input()
-  selectedSeriesIndex: number;
+  @Input() selectedSeriesIndex: number;
   
-  @Output()
-  onChangeSelection = new EventEmitter<number>();
+  @Output() onChangeSelection = new EventEmitter<number>();
   
   selectSeries(index: number) {
     this.onChangeSelection.emit(index);

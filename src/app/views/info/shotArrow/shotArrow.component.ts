@@ -9,12 +9,12 @@ import { Shot } from "../../../classes/session";
 })
 export class ShotArrowComponent {
 
-  private arrow: String;
-  private angle: String;
+  arrow: String;
+  angle: String;
 
   @Input() set shot(shot: Shot) {
     if (shot.is_inner_ten) {
-      if (shot.ring_text == "10.9") {
+      if (shot.teiler < 10) {
         this.arrow = "&#9673;";
       }
       else {

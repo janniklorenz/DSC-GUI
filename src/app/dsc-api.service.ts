@@ -4,7 +4,7 @@ import { ReplaySubject } from "rxjs";
 
 import ReconnectingWebSocket from "../../node_modules/reconnectingwebsocket/reconnecting-websocket.min.js";
 
-import { Session } from "./classes/session";
+import { Session, DSCConfig } from "./classes/session";
 
 import { environment } from '../environments/environment';
 
@@ -31,6 +31,11 @@ export class DscApiService {
   get session() {
     return this._session.asObservable();
   }
+  
+  private _config: ReplaySubject<DSCConfig> = new ReplaySubject<DSCConfig>();
+  get config() {
+    return this._config.asObservable();
+  }
 
   constructor() {
     this.socket = new ReconnectingWebSocket(environment.serverURL, "rust-websocket");
@@ -43,6 +48,9 @@ export class DscApiService {
 		this.socket.onmessage = (event) => {
 			try {
 				let data = JSON.parse(event.data);
+        if (data.type == "Config") {
+          this._config.next(data.config);
+				}
 				if (data.type == "Session") {
           this._session.next(data.session);
 				}
@@ -90,7 +98,7 @@ export class DscApiService {
     this.send({
       "type": "SetPart",
       "name": partId,
-      "forceNewPart": forceNewPart,
+      "force_new_part": forceNewPart,
     });
   }
   setSessionIndex(sessionIndex) {

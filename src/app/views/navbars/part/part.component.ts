@@ -21,7 +21,7 @@ export class PartComponent implements OnInit {
     this.openPartModal.emit(state);
   }
 
-  private disciplineParts: DisciplinePart[];
+  disciplineParts: DisciplinePart[];
   private _session: Session;
   @Input()
   set session(session: Session) {
@@ -36,7 +36,7 @@ export class PartComponent implements OnInit {
       }
     });
   }
-  private disciplinePart: DisciplinePart;
+  disciplinePart: DisciplinePart;
   
   getDisciplinePart(type: String): DisciplinePart {
     return this._session.discipline.parts.find(part => part.id == type);

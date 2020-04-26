@@ -9,14 +9,9 @@ import { Session, Serie, Target } from "../../../classes/session";
 })
 export class CurrentSeriesComponent {
   
-  @Input()
-  private series: Serie;
-  
-  @Input()
-  selectedShotIndex: number;
-  
-  @Output()
-  onChangeSelection = new EventEmitter<number>();
+  @Input() series: Serie;
+  @Input() selectedShotIndex: number;
+  @Output() onChangeSelection = new EventEmitter<number>();
   
   selectShot(index: number) {
     this.onChangeSelection.emit(index);

@@ -9,11 +9,10 @@ import { Session, Part } from "../../../classes/session";
 })
 export class AverageComponent implements OnInit {
 
-  private part: Part;
+  part: Part;
 
   @Input() set session(session: Session) {
     this.part = session.parts[session.active_part];
-    console.log(this.part)
   }
 
   constructor() { }

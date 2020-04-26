@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiKey: "123",
-  serverURL: "ws://10.1.0.80:3008",
+  // serverURL: "ws://10.1.0.80:3008",
+  serverURL: "ws://10.1.0.125:3009",
   // serverURL: "ws://10.1.0.134:3008",
 };
 

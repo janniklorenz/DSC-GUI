@@ -9,8 +9,8 @@ import { Session } from "../../../classes/session";
 })
 export class SumComponent implements OnInit {
 
-  private sum_part: number;
-  private sum_serie: number;
+  sum_part: number;
+  sum_serie: number;
 
   @Input() set session(session: Session){
     const part = session.parts[session.active_part];

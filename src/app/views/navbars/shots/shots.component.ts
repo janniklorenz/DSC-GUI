@@ -9,8 +9,8 @@ import { Session, Serie } from "../../../classes/session";
 })
 export class ShotsComponent implements OnInit {
 
-  private number_of_shots_part: number;
-  private number_of_shots_serie: number;
+  number_of_shots_part: number;
+  number_of_shots_serie: number;
 
   @Input() set session(session: Session){
     const part = session.parts[session.active_part];

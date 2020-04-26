@@ -21,5 +21,5 @@ export class ShotComponent {
     }
   }
 
-  private hit_color: Color;
+  hit_color: Color;
 }

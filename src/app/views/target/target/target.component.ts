@@ -17,7 +17,7 @@ export class TargetComponent implements OnInit {
   @Input() width: string = "200";
   @Input() height: string = "200";
 
-  private viewBox: string = "";
+  viewBox: string = "";
   private radius: number;
   private border_width: number;
   private scale: number;
