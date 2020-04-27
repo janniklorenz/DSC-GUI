@@ -1,0 +1,13 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: node:13
+  script:
+    - npm install
+    - ./node_modules/.bin/ng build
+
+  artifacts:
+    paths:
+      - ./dist/DSC
