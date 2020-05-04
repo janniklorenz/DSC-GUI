@@ -5,9 +5,9 @@ import { DscApiService } from "../../dsc-api.service";
 import { Session, DisciplinePart, Part, DSCConfig} from "../../classes/session";
 
 @Component({
-  selector: 'app-dsc',
-  templateUrl: './dsc.component.html',
-  styleUrls: ['./dsc.component.scss'],
+  selector: 'app-dsc-print',
+  templateUrl: './dsc-print.component.html',
+  styleUrls: ['./dsc-print.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger(
@@ -31,7 +31,7 @@ import { Session, DisciplinePart, Part, DSCConfig} from "../../classes/session";
     )
   ]
 })
-export class DscComponent implements OnInit {
+export class DscPrintComponent implements OnInit {
 
   private selectedShotIndex: number = 0;
   private selectedSeriesIndex: number = 0;

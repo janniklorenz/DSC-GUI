@@ -49,19 +49,7 @@ export class PartComponent implements OnInit {
   
   
   togglePart() {
-    const disciplineParts = this._session.discipline.parts;
-    const activePart = this._session.parts[this._session.active_part];
-    const activeDisciplineParts = this.getDisciplinePart(activePart.part_type);
-    const currentIndex = disciplineParts.indexOf(activeDisciplineParts);
-    
-    // Jump to the first disciplin part if we are at the end
-    if (currentIndex + 1 >= disciplineParts.length) {
-      this.dscAPI.setPart(disciplineParts[0].id, false);
-    }
-    // Jump to the nex disciplin part
-    else {
-      this.dscAPI.setPart(disciplineParts[currentIndex+1].id, false);
-    }
+    this.dscAPI.togglePart();
   }
   
 

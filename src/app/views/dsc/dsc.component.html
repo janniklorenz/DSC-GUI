@@ -50,7 +50,7 @@
   </div>
 
   <div fxFlex="12" class="navbar navbarBottom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1vh" *ngIf="session">
-    <app-user fxFlex [user]="session.info.user"></app-user>
+    <app-user fxFlex [user]="session.info.user" [line]="session.info.line"></app-user>
     <app-club fxFlex *ngIf="session.info.club.name != ''" [club]="session.info.club" [team]="session.info.team"></app-club>
     <app-disciplin fxFlex [discipline]="session.discipline" [disciplines]="dscConfig.disciplines" [(openMenu)]="hasOpenMenu"></app-disciplin>
     <!-- <app-new-target fxFlex class="button "></app-new-target> -->

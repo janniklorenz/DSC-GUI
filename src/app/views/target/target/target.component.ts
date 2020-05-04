@@ -10,7 +10,8 @@ export class TargetComponent implements OnInit {
   
   @Input() target: Target;
   @Input() series: Serie;
-  @Input() selectedShotIndex: number;
+  @Input() selectedShotIndex: number = null;
+  @Input() line: string = '';
 
   @Input() has_trial_corner: boolean = false;
 
@@ -34,7 +35,6 @@ export class TargetComponent implements OnInit {
     else {
       this.scale = 1;
     }
-
     this.viewBox = ((-this.radius)/this.scale) + " " + ((-this.radius)/this.scale) + " " + ((2*this.radius)/this.scale) + " " + ((2*this.radius)/this.scale);
   }
 

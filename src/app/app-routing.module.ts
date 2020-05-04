@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { DscComponent } from './views/dsc/dsc.component';
+import { DscPrintComponent } from './views/dsc-print/dsc-print.component';
+
+const routes: Routes = [
+  { path: "", component: DscComponent },
+  { path: "print", component: DscPrintComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

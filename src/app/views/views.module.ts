@@ -6,11 +6,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarsModule } from './navbars/navbars.module';
 import { InfoModule } from './info/info.module';
 import { DscComponent } from './dsc/dsc.component';
+import { DscPrintComponent } from './dsc-print/dsc-print.component';
 import { TargetModule } from './target/target.module';
 
 @NgModule({
   declarations: [
-    DscComponent,
+    DscComponent, DscPrintComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import { TargetModule } from './target/target.module';
     NavbarsModule, InfoModule, TargetModule,
   ],
   exports: [
-    DscComponent,
+    DscComponent, DscPrintComponent,
   ],
 })
 export class ViewsModule { }

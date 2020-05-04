@@ -4,7 +4,7 @@ import { ReplaySubject } from "rxjs";
 
 import ReconnectingWebSocket from "../../node_modules/reconnectingwebsocket/reconnecting-websocket.min.js";
 
-import { Session, DSCConfig } from "./classes/session";
+import { Session, DSCConfig, DisciplinePart } from "./classes/session";
 
 import { environment } from '../environments/environment';
 
@@ -27,6 +27,7 @@ export class DscApiService {
   }
 
   // current dsc session, or null if not connected
+  private currentSession: Session;
   private _session: ReplaySubject<Session> = new ReplaySubject<Session>();
   get session() {
     return this._session.asObservable();
@@ -38,9 +39,13 @@ export class DscApiService {
   }
 
   constructor() {
-    this.socket = new ReconnectingWebSocket(environment.serverURL, "rust-websocket");
+    this.socket = new ReconnectingWebSocket(environment.serverURL);
+    // this.socket = new ReconnectingWebSocket("ws://" + location.host + "/socket/");
 
-    this.socket.onopen = () => this._connected.next(true);
+    this.socket.onopen = () => {
+      this._connected.next(true);
+      window.status = "ready";
+    };
     this.socket.onclose = () => {
       this._connected.next(false);
       this._session.next(null);
@@ -53,6 +58,7 @@ export class DscApiService {
 				}
 				if (data.type == "Session") {
           this._session.next(data.session);
+          this.currentSession = data.session;
 				}
 
 				if (data.type == "Message") {
@@ -90,6 +96,12 @@ export class DscApiService {
   private send(data) {
     this.socket.send(JSON.stringify(data));
   }
+  
+  private getDisciplinePart(session: Session, type: String): DisciplinePart {
+    return session.discipline.parts.find(part => part.id == type);
+  }
+  
+  
 
   setNewTarget() {
     this.send({"type": "NewTarget"});
@@ -100,6 +112,23 @@ export class DscApiService {
       "name": partId,
       "force_new_part": forceNewPart,
     });
+  }
+  togglePart() {
+    const session = this.currentSession;
+    if (session == null) return;
+    const disciplineParts = session.discipline.parts;
+    const activePart = session.parts[session.active_part];
+    const activeDisciplineParts = this.getDisciplinePart(session, activePart.part_type);
+    const currentIndex = disciplineParts.indexOf(activeDisciplineParts);
+    
+    // Jump to the first disciplin part if we are at the end
+    if (currentIndex + 1 >= disciplineParts.length) {
+      this.setPart(disciplineParts[0].id, false);
+    }
+    // Jump to the nex disciplin part
+    else {
+      this.setPart(disciplineParts[currentIndex+1].id, false);
+    }
   }
   setSessionIndex(sessionIndex) {
     // this.socket.emit("setSessionIndex", {
