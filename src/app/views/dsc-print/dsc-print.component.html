@@ -1,21 +1,58 @@
 
 <div *ngIf="session">
   <div *ngFor="let part of session.parts; let partIndex=index;">
-    <p>Sum {{part.sum.text}}</p>
-    <p>Ave {{part.average}}</p>
-    <p>Anzahl {{part.number_of_shots}}</p>
+    <div class="padding">
+      <p class="disciplinePartLabel">{{getDisciplinePart(part.part_type).name}}</p>
+      <table>
+        <tr>
+          <th>Anzahl</th>
+          <th>Ring</th>
+          <th>Schnitt</th>
+          <th>Zeit</th>
+        </tr>
+        <tr class="summaryRow">
+          <td>{{part.number_of_shots}}</td>
+          <td>{{part.sum.text}}</td>
+          <td>{{part.average}} &Oslash;</td>
+          <td>TODO</td>
+        </tr>
+      </table>
+    </div>
     <div fxLayout="row wrap">
-      <div fxFlex="50%" fxLayout="row" fxLayoutGap="10px" *ngFor="let series of part.series; let seriesIndex=index;">
-        <table fxFlex>
-          <tr *ngFor="let shot of series.shots">
+      <div class="padding serie" *ngFor="let series of part.series; let seriesIndex=index;">
+        <p class="fullLabel center">{{seriesIndex + 1}}. Serie</p>
+        <table>
+          <colgroup>
+            <col span="1" style="width: 8%;">
+            <col span="1" style="width: 12%;">
+            <col span="1" style="width: 12%;">
+            <col span="1" style="width: 12%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 30%;">
+          </colgroup>
+          <tr>
+            <th>Nr</th>
+            <th>Ring</th>
+            <th>Winkel</th>
+            <th>Teiler</th>
+            <th>Zeit</th>
+            <th>Grafik</th>
+          <!-- <tr *ngFor="let shot of series.shots; let shotIndex=index;"> -->
+          <tr class="realShots" *ngFor="let shot of series.shots; let shotIndex=index;">
             <td>{{shot.number}}.</td>
             <td>{{shot.ring_text}}</td>
             <td>{{shot.teiler}}</td>
             <td>{{shot.angle}}</td>
-            <!-- <td>{{shot}}</td> -->
+            <td>00:00 Uhr</td>
+            <td class="targetCell" *ngIf="shotIndex == 0" [attr.rowspan]="getDisciplinePart(part.part_type).series_length">
+              <app-target class="box" [target]="session.discipline.target" [line]="partIndex + 'x' + seriesIndex" [series]="series" [has_trial_corner]="true" [width]="'100%'" [height]="'100%'"></app-target>
+            </td>
+          </tr>
+          <tr class="dummyShots" *ngFor="let i of getDummyRowsForPart(part.part_type, series);">
+            <td>&nbsp;</td>
           </tr>
         </table>
-        <app-target fxFlex class="box" [target]="session.discipline.target" [line]="partIndex + 'x' + seriesIndex" [series]="series" [has_trial_corner]="true" [width]="'100%'" [height]="'100%'"></app-target>
+        <!-- <div class="page-break"></div> -->
       </div>
     </div>
   </div>

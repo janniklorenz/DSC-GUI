@@ -278,3 +278,79 @@ h1, h2, h3, h4 {
 	z-index: 1;
 	// pointer-events: none;
 }
+
+
+
+
+body{
+        // width: 21cm;
+        // height: 29.7cm;
+        // margin: 15mm 45mm 15mm 45mm; 
+        /* change the margins as you want them to be. */
+   } 
+
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0.5px solid #000 !important;
+  text-align: center;
+}
+table .realShots td {
+  border: 0.5px solid #000;
+}
+table .dummyShots td {
+  border: 0.5px solid #fff;
+}
+
+
+table .summaryRow td {
+  border: 0.5px solid rgba(1,1,1,0);
+}
+
+
+table th {
+  border: 1px solid #000;
+  font-weight: normal;
+}
+
+.targetCell {
+  max-width: 30%;
+}
+
+.fullLabel {
+  width: 100%;
+  text-align: center;
+  @extend .bold;
+  margin: 0;
+}
+
+.disciplinePartLabel {
+  width: 100%;
+  text-align: left;
+  font-size: 1.5em;
+  @extend .bold;
+  margin: 20px 0 0 0;
+}
+
+
+.padding {
+  // padding: 10px;
+} 
+
+
+
+
+.serie {
+  // page-break-inside: avoid;
+  width: 50%;
+  float: left;
+  background: red;
+  
+  page-break-inside: avoid;
+  margin: 0;
+  padding: 0;
+}

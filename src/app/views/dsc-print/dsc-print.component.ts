@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DscApiService } from "../../dsc-api.service";
-import { Session, DisciplinePart, Part, DSCConfig} from "../../classes/session";
+import { Session, DisciplinePart, Part, DSCConfig, Serie} from "../../classes/session";
 
 @Component({
   selector: 'app-dsc-print',
@@ -69,6 +69,16 @@ export class DscPrintComponent implements OnInit {
       this.dscConfig = config;
     });
 	}
+  
+  getDummyRowsForPart(type: string, series: Serie) {
+    const dp = this.getDisciplinePart(type);
+    const dummyRows = dp.series_length - series.shots.length;
+    return Array(dummyRows).fill(0);
+  }
+  
+  getDisciplinePart(type: string) {
+    return this.session.discipline.parts.find(dp => dp.id == type);
+  }
   
   getCurrentShot(){
     return this.getCurrentSeries().shots[this.selectedShotIndex];
