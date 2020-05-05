@@ -13,7 +13,7 @@ export class SeriesOverviewComponent {
   currentPart: Part;
 
   @Input() set session(session: Session) {
-    this.currentPart = session.parts[session.active_part];
+    this.currentPart = session.sessionParts[session.sessionIndex];
   }
   
   @Input() selectedSeriesIndex: number;

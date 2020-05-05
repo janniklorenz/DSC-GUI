@@ -1,17 +1,15 @@
 <div (click)="toggleMenu()" class="navitem-dropup">
 
-  <div class="navitem button" [ngClass]="{'navitem-active': _openMenu}" *ngIf="discipline" (click)="openModal">
+  <div class="navitem button" [ngClass]="{'navitem-active': _openMenu}" *ngIf="disziplin" (click)="openModal">
     <h4>Disziplin</h4>
-    <h3>{{discipline.title}}</h3>
-    <h4>{{discipline.target.title}}</h4>
+    <h3>{{disziplin.title}}</h3>
+    <h4>{{disziplin.scheibe.title}}</h4>
   </div>
   
   <div class="dropup-content dropup-content-big" [@inOutAnimation] fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1vmin" *ngIf="_openMenu">
-    
-    <div *ngFor="let d of disciplines | keyvalue" class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline(d.value.id)">
+    <div *ngFor="let d of config.disziplinen.all | keyvalue" class="box button" fxFlex="1 1 calc(33%-1vmin)" (click)="setDiscipline(d.value._id)">
       <h3>{{d.value.title}}</h3>
     </div>
-    
   </div>
   
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { Discipline } from "../../../classes/session";
+import { Session, Config, Discipline } from "../../../classes/session";
 import { DscApiService } from "../../../dsc-api.service";
 
 @Component({
@@ -32,8 +32,9 @@ import { DscApiService } from "../../../dsc-api.service";
 })
 export class DisciplinComponent implements OnInit {
 
-  @Input() discipline: Discipline;
-  @Input() disciplines: Discipline[];
+  @Input() config: Config;
+  @Input() disziplin: Discipline;
+  // @Input() disciplines: Discipline[];
   
   private menuTitle = "disciplin";
   @Output() openMenuChange = new EventEmitter();
@@ -53,6 +54,7 @@ export class DisciplinComponent implements OnInit {
   }
   
   setDiscipline(disciplin: string) {
+    console.log("setdisciplin", disciplin)
     this.dscAPI.setDisciplin(disciplin);
   }
 

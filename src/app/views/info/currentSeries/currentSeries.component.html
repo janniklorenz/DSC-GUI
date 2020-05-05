@@ -2,7 +2,7 @@
 <table>
   <tr class="button" *ngFor="let shot of series.shots; index as i;" (click)="selectShot(i)">
     <td>{{shot.number}}.</td>
-    <td [ngClass]="{'bold' : i == selectedShotIndex}">{{shot.ring_text}}</td>
+    <td [ngClass]="{'bold' : i == selectedShotIndex}">{{shot.ring.display}}</td>
     <td><app-shot-arrow [shot]="shot"></app-shot-arrow></td>
   <tr>
 </table>

@@ -1,8 +1,8 @@
 
 <div *ngIf="session">
-  <div *ngFor="let part of session.parts; let partIndex=index;">
+  <div *ngFor="let part of session.sessionParts; let partIndex=index;">
     <div class="padding">
-      <p class="disciplinePartLabel">{{getDisciplinePart(part.part_type).name}}</p>
+      <p class="disciplinePartLabel">{{session.disziplin.parts[part.type].title}}</p>
       <table>
         <tr>
           <th>Anzahl</th>
@@ -11,16 +11,16 @@
           <th>Zeit</th>
         </tr>
         <tr class="summaryRow">
-          <td>{{part.number_of_shots}}</td>
-          <td>{{part.sum.text}}</td>
-          <td>{{part.average}} &Oslash;</td>
+          <td>{{part.anzahl}}</td>
+          <td>{{part.gesamt}}</td>
+          <td>{{part.schnitt}} &Oslash;</td>
           <td>TODO</td>
         </tr>
       </table>
     </div>
     <div fxLayout="row wrap">
-      <div class="padding serie" *ngFor="let series of part.series; let seriesIndex=index;">
-        <p class="fullLabel center">{{seriesIndex + 1}}. Serie</p>
+      <div class="padding serie" fxFlex="50%" fxFlex.sm="100%" *ngFor="let serie of part.serien; let serienIndex=index;">
+        <p class="fullLabel center">{{serienIndex + 1}}. Serie</p>
         <table>
           <colgroup>
             <col span="1" style="width: 8%;">
@@ -38,57 +38,21 @@
             <th>Zeit</th>
             <th>Grafik</th>
           <!-- <tr *ngFor="let shot of series.shots; let shotIndex=index;"> -->
-          <tr class="realShots" *ngFor="let shot of series.shots; let shotIndex=index;">
+          <tr class="realShots" *ngFor="let shot of serie.shots; let shotIndex=index;">
             <td>{{shot.number}}.</td>
-            <td>{{shot.ring_text}}</td>
+            <td>{{shot.ring.display}}</td>
             <td>{{shot.teiler}}</td>
-            <td>{{shot.angle}}</td>
+            <td>{{shot.winkel}}</td>
             <td>00:00 Uhr</td>
-            <td class="targetCell" *ngIf="shotIndex == 0" [attr.rowspan]="getDisciplinePart(part.part_type).series_length">
-              <app-target class="box" [target]="session.discipline.target" [line]="partIndex + 'x' + seriesIndex" [series]="series" [has_trial_corner]="true" [width]="'100%'" [height]="'100%'"></app-target>
+            <td class="targetCell" *ngIf="shotIndex == 0" [attr.rowspan]="session.disziplin.parts[part.type].serienLength">
+              <app-target class="box" [target]="session.disziplin.scheibe" [line]="partIndex + 'x' + serienIndex" [series]="serie" [has_trial_corner]="true" [width]="'100%'" [height]="'100%'"></app-target>
             </td>
           </tr>
-          <tr class="dummyShots" *ngFor="let i of getDummyRowsForPart(part.part_type, series);">
+          <tr class="dummyShots" *ngFor="let i of getDummyRowsForPart(part.type, serie);">
             <td>&nbsp;</td>
           </tr>
         </table>
-        <!-- <div class="page-break"></div> -->
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="1vh" style="height:100%;">
-
-  <div fxFlex="76" class="main" fxLayout fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="1vh" fxLayoutWrap="wrap" *ngIf="session">
-    <app-target fxFlex fxFlex.xs="30" class="box" [target]="session.discipline.target" [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex" [has_trial_corner]="disciplinePart.has_trial_corner" [width]="'100%'" [height]="'100%'"></app-target>
-    <div fxFlex="30" fxFlex.xs="70" *ngIf="activePart.number_of_shots > 0" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1vh">
-      <app-current-shot
-        class="box contentBox"
-        *ngIf="getCurrentShot()"
-        fxFlex="none"
-        [shot]="getCurrentShot()"
-      ></app-current-shot>
-      <div fxFlex fxLayout fxLayout.xs="row" fxLayoutWrap="wrap" fxLayoutAlign="space-around start" fxLayoutGap="1vh">
-        <app-current-series
-          class="contentBox"
-          *ngIf="getCurrentSeries().number_of_shots > 0"
-          fxFlex="60" fxFlex.xs="50"
-          [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex"
-          (onChangeSelection)="selectedShotIndex = $event"
-        ></app-current-series>
-        <app-series-overview
-          class="contentBox"
-          *ngIf="activePart.number_of_shots > 0"
-          fxFlex="40 1 auto" fxFlex.xs="50"
-          [session]="session" [selectedSeriesIndex]="selectedSeriesIndex"
-          (onChangeSelection)="selectedSeriesIndex = $event"
-        ></app-series-overview>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-  
- -->

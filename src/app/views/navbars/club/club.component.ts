@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Club, Team } from "../../../classes/session";
+import { User } from "../../../classes/session";
 
 @Component({
   selector: 'app-club',
@@ -9,8 +9,7 @@ import { Club, Team } from "../../../classes/session";
 })
 export class ClubComponent implements OnInit {
 
-  @Input() club: Club;
-  @Input() team: Team;
+  @Input() user: User;
 
   constructor() { }
 

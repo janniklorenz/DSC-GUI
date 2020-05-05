@@ -11,16 +11,20 @@ import { TargetModule } from './target/target.module';
 
 @NgModule({
   declarations: [
-    DscComponent, DscPrintComponent,
+    DscComponent,
+    DscPrintComponent,
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    NavbarsModule, InfoModule, TargetModule,
+    NavbarsModule,
+    InfoModule,
+    TargetModule,
   ],
   exports: [
-    DscComponent, DscPrintComponent,
+    DscComponent,
+    DscPrintComponent,
   ],
 })
 export class ViewsModule { }

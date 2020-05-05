@@ -12,7 +12,7 @@ export class AverageComponent implements OnInit {
   part: Part;
 
   @Input() set session(session: Session) {
-    this.part = session.parts[session.active_part];
+    this.part = session.sessionParts[session.sessionIndex];
   }
 
   constructor() { }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User, Line } from "../../../classes/session";
+import { User, Config } from "../../../classes/session";
 
 @Component({
   selector: 'app-user',
@@ -10,7 +10,7 @@ import { User, Line } from "../../../classes/session";
 export class UserComponent implements OnInit {
 
   @Input() user: User;
-  @Input() line: Line;
+  @Input() confg: Config;
 
   constructor() { }
 

@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { ReplaySubject } from "rxjs";
 
-import ReconnectingWebSocket from "../../node_modules/reconnectingwebsocket/reconnecting-websocket.min.js";
+// import ReconnectingWebSocket from "../../node_modules/reconnectingwebsocket/reconnecting-websocket.min.js";
+import * as io from 'socket.io-client';
 
-import { Session, DSCConfig, DisciplinePart } from "./classes/session";
+
+import { Session, Config, DisciplinePart } from "./classes/session";
 
 import { environment } from '../environments/environment';
 
@@ -13,11 +15,12 @@ import { environment } from '../environments/environment';
 })
 export class DscApiService {
 
-  private socket: ReconnectingWebSocket;
+  private socket: io;
 
   // TODO
   private auth = {
-    key: environment.apiKey,
+    // key: environment.apiKey,
+    key: "123",
   };
 
   // websocket connection status to dsc server
@@ -33,46 +36,89 @@ export class DscApiService {
     return this._session.asObservable();
   }
   
-  private _config: ReplaySubject<DSCConfig> = new ReplaySubject<DSCConfig>();
+  private _config: ReplaySubject<Config> = new ReplaySubject<Config>();
   get config() {
     return this._config.asObservable();
   }
 
   constructor() {
-    this.socket = new ReconnectingWebSocket(environment.serverURL);
-    // this.socket = new ReconnectingWebSocket("ws://" + location.host + "/socket/");
-
-    this.socket.onopen = () => {
+    this.socket = io("http://10.1.0.80:3000");
+    
+    this.socket.on('connect', () => {
+      console.log('on connect');
       this._connected.next(true);
-      window.status = "ready";
-    };
-    this.socket.onclose = () => {
+    });
+    
+    this.socket.on('disconnect', () => {
+      console.log('on disconnect');
       this._connected.next(false);
-      this._session.next(null);
-    };
-		this.socket.onmessage = (event) => {
-			try {
-				let data = JSON.parse(event.data);
-        if (data.type == "Config") {
-          this._config.next(data.config);
-				}
-				if (data.type == "Session") {
-          this._session.next(data.session);
-          this.currentSession = data.session;
-				}
-
-				if (data.type == "Message") {
-          console.log("set message", data)
-					// if (data.log != null) {
-					// 	this.logs.push(data.log);
-					// 	this.show_modal_message();
-					// }
-				}
-			}
-			catch (err) {
-				console.error(err)
-			}
-		}
+    });
+    
+    this.socket.on('setStatus', (connected) => {
+      console.log('setStatus', connected);
+    });
+    
+    
+    
+    this.socket.on('showMessage', (message) => {
+      console.log('showMessage', message);
+    });
+    this.socket.on('hideMessage', () => {
+      console.log('hideMessage');
+    });
+    
+    
+    
+    
+    
+    
+    this.socket.on('setData', (session) => {
+      this.currentSession = session;
+      this._session.next(session);
+      console.log('setData', session);
+    });
+    
+    this.socket.on('setConfig', (config) => {
+      console.log('setConfig', config);
+      this._config.next(config);
+    });
+    
+    
+    
+    // this.socket = new ReconnectingWebSocket(environment.serverURL);
+    // // this.socket = new ReconnectingWebSocket("ws://" + location.host + "/socket/");
+    // 
+    // this.socket.onopen = () => {
+    //   this._connected.next(true);
+    //   window.status = "ready";
+    // };
+    // this.socket.onclose = () => {
+    //   this._connected.next(false);
+    //   this._session.next(null);
+    // };
+		// this.socket.onmessage = (event) => {
+		// 	try {
+		// 		let data = JSON.parse(event.data);
+    //     if (data.type == "Config") {
+    //       this._config.next(data.config);
+		// 		}
+		// 		if (data.type == "Session") {
+    //       this._session.next(data.session);
+    //       this.currentSession = data.session;
+		// 		}
+    // 
+		// 		if (data.type == "Message") {
+    //       console.log("set message", data)
+		// 			// if (data.log != null) {
+		// 			// 	this.logs.push(data.log);
+		// 			// 	this.show_modal_message();
+		// 			// }
+		// 		}
+		// 	}
+		// 	catch (err) {
+		// 		console.error(err)
+		// 	}
+		// }
   }
 
 
@@ -94,40 +140,40 @@ export class DscApiService {
 
   // Send given data to dsc server
   private send(data) {
-    this.socket.send(JSON.stringify(data));
+    // this.socket.send(JSON.stringify(data));
   }
   
-  private getDisciplinePart(session: Session, type: String): DisciplinePart {
-    return session.discipline.parts.find(part => part.id == type);
-  }
-  
+
   
 
   setNewTarget() {
-    this.send({"type": "NewTarget"});
+    this.socket.emit("newTarget", {
+      auth: this.auth,
+    });
   }
   setPart(partId, forceNewPart) {
-    this.send({
-      "type": "SetPart",
-      "name": partId,
-      "force_new_part": forceNewPart,
+    console.log(partId);
+    this.socket.emit("setPart", {
+      auth: this.auth,
+      partId: partId,
     });
   }
   togglePart() {
     const session = this.currentSession;
     if (session == null) return;
-    const disciplineParts = session.discipline.parts;
-    const activePart = session.parts[session.active_part];
-    const activeDisciplineParts = this.getDisciplinePart(session, activePart.part_type);
-    const currentIndex = disciplineParts.indexOf(activeDisciplineParts);
+    const partsOrder = session.disziplin.partsOrder;
+    const activePart = session.sessionParts[session.sessionIndex];
+    const currentIndex = partsOrder.indexOf(activePart.type)
+    
+    console.log(currentIndex)
     
     // Jump to the first disciplin part if we are at the end
-    if (currentIndex + 1 >= disciplineParts.length) {
-      this.setPart(disciplineParts[0].id, false);
+    if (currentIndex + 1 >= partsOrder.length) {
+      this.setPart(partsOrder[0], false);
     }
     // Jump to the nex disciplin part
     else {
-      this.setPart(disciplineParts[currentIndex+1].id, false);
+      this.setPart(partsOrder[currentIndex+1], false);
     }
   }
   setSessionIndex(sessionIndex) {
@@ -155,9 +201,9 @@ export class DscApiService {
     // });
   }
   setDisciplin(disziplin) {
-    this.send({
-      "type": "SetDisciplin",
-      "name": disziplin,
+    this.socket.emit("setDisziplin", {
+      auth: this.auth,
+      disziplin: disziplin,
     });
   }
   print() {

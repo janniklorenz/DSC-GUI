@@ -6,24 +6,24 @@
     <!-- <app-time fxFlex [session]="session"></app-time> -->
     <app-shots
       fxFlex
-      *ngIf="activePart.number_of_shots > 0"
+      *ngIf="activePart.anzahl > 0"
       [session]="session"
     ></app-shots>
     <app-average
       fxFlex
-      *ngIf="activePart.number_of_shots > 0"
+      *ngIf="activePart.anzahl > 0"
       [session]="session"
     ></app-average>
     <app-sum
       fxFlex
-      *ngIf="activePart.number_of_shots > 0"
+      *ngIf="activePart.anzahl > 0"
       [session]="session"
     ></app-sum>
   </div>
 
   <div fxFlex="76" class="main" fxLayout fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="1vh" fxLayoutWrap="wrap" *ngIf="session">
-    <app-target fxFlex fxFlex.xs="30" class="box" [target]="session.discipline.target" [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex" [has_trial_corner]="disciplinePart.has_trial_corner" [width]="'100%'" [height]="'100%'"></app-target>
-    <div fxFlex="30" fxFlex.xs="70" *ngIf="activePart.number_of_shots > 0" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1vh">
+    <app-target fxFlex fxFlex.xs="30" class="box" [target]="session.disziplin.scheibe" [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex" [has_trial_corner]="disciplinePart.probeEcke" [width]="'100%'" [height]="'100%'"></app-target>
+    <div fxFlex="30" fxFlex.xs="70" *ngIf="activePart.anzahl > 0" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1vh">
       <app-current-shot
         class="box contentBox"
         *ngIf="getCurrentShot()"
@@ -33,14 +33,14 @@
       <div fxFlex fxLayout fxLayout.xs="row" fxLayoutWrap="wrap" fxLayoutAlign="space-around start" fxLayoutGap="1vh">
         <app-current-series
           class="contentBox"
-          *ngIf="getCurrentSeries().number_of_shots > 0"
+          *ngIf="getCurrentSeries().anzahl > 0"
           fxFlex="60" fxFlex.xs="50"
           [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex"
           (onChangeSelection)="selectedShotIndex = $event"
         ></app-current-series>
         <app-series-overview
           class="contentBox"
-          *ngIf="activePart.number_of_shots > 0"
+          *ngIf="activePart.anzahl > 0"
           fxFlex="40 1 auto" fxFlex.xs="50"
           [session]="session" [selectedSeriesIndex]="selectedSeriesIndex"
           (onChangeSelection)="selectedSeriesIndex = $event"
@@ -50,9 +50,9 @@
   </div>
 
   <div fxFlex="12" class="navbar navbarBottom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1vh" *ngIf="session">
-    <app-user fxFlex [user]="session.info.user" [line]="session.info.line"></app-user>
-    <app-club fxFlex *ngIf="session.info.club.name != ''" [club]="session.info.club" [team]="session.info.team"></app-club>
-    <app-disciplin fxFlex [discipline]="session.discipline" [disciplines]="dscConfig.disciplines" [(openMenu)]="hasOpenMenu"></app-disciplin>
+    <app-user fxFlex [user]="session.user" [config]="config"></app-user>
+    <app-club fxFlex *ngIf="session.user.verein != ''" [user]="session.user"></app-club>
+    <app-disciplin fxFlex [disziplin]="session.disziplin" [config]="config" [(openMenu)]="hasOpenMenu"></app-disciplin>
     <!-- <app-new-target fxFlex class="button "></app-new-target> -->
     <app-actions fxFlex [(openMenu)]="hasOpenMenu"></app-actions>
     <app-part fxFlex [session]="session"></app-part>

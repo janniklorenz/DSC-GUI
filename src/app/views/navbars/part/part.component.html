@@ -2,9 +2,9 @@
 
   <div class="navitem button" (click)="togglePart()">
     <h4>Modus</h4>
-    <h3>{{disciplinePart.name}}</h3>
+    <h3>{{activeDisciplinePart.title}}</h3>
     <h4>
-      <span *ngFor="let part of disciplineParts;" [ngClass]="{'bold' : disciplinePart.id == part.id}">{{part.name}} </span>
+      <span *ngFor="let partID of _session.disziplin.partsOrder" [ngClass]="{'bold' : partID == activePart.type}">{{_session.disziplin.parts[partID].title}} </span>
     </h4>
   </div>
   

@@ -13,10 +13,10 @@ export class SumComponent implements OnInit {
   sum_serie: number;
 
   @Input() set session(session: Session){
-    const part = session.parts[session.active_part];
-    const serie = part.series[part.series.length-1];
-    this.sum_part = part.sum.text;
-    this.sum_serie = serie.sum.text;
+    const part = session.sessionParts[session.sessionIndex];
+    const serie = part.serien[part.serien.length-1];
+    this.sum_part = part.gesamt;
+    this.sum_serie = serie.gesamt;
   };
 
   constructor() { }

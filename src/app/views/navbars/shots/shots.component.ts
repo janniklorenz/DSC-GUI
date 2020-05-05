@@ -13,10 +13,10 @@ export class ShotsComponent implements OnInit {
   number_of_shots_serie: number;
 
   @Input() set session(session: Session){
-    const part = session.parts[session.active_part];
-    const serie = part.series[part.series.length-1];
-    this.number_of_shots_part = part.number_of_shots;
-    this.number_of_shots_serie = serie.number_of_shots;
+    const part = session.sessionParts[session.sessionIndex];
+    const serie = part.serien[part.serien.length-1];
+    this.number_of_shots_part = part.anzahl;
+    this.number_of_shots_serie = serie.anzahl;
   };
 
 

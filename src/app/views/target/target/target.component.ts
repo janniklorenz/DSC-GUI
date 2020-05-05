@@ -26,7 +26,7 @@ export class TargetComponent implements OnInit {
   ngOnChanges() {
     if (this.target == null) {return}
     
-    this.radius = this.target.rings[this.target.rings.length-1].width + 1;
+    this.radius = this.target.ringe[this.target.ringe.length-1].width + 1;
     this.border_width = this.radius / 400;
 
     if (this.series != null && this.selectedShotIndex != null) {
@@ -40,12 +40,13 @@ export class TargetComponent implements OnInit {
 
   private calculateScale(series: Serie, target: Target): number {
     var shot = series.shots[this.selectedShotIndex];
+    
     var zoom = 1;
     if (shot != null) {
-      target.rings.every(ring => {
-        if (ring.value === Math.floor(shot.ring)) {
-          if (ring.zoom != null) {
-            zoom = ring.zoom;
+      target.ringe.every(ring => {
+        if (ring.value == shot.ring.int) {
+          if (ring.zoomScale != null) {
+            zoom = ring.zoomScale;
             return false;
           }
         }

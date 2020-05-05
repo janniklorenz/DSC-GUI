@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DscApiService } from "../../dsc-api.service";
-import { Session, DisciplinePart, Part, DSCConfig} from "../../classes/session";
+import { Session, DisciplinePart, Part, Config} from "../../classes/session";
 
 @Component({
   selector: 'app-dsc',
@@ -39,7 +39,7 @@ export class DscComponent implements OnInit {
   private disciplinePart: DisciplinePart;
   
   session: Session;
-  dscConfig: DSCConfig;
+  config: Config;
   activePart: Part;
   
   hasOpenMenu = {state: false, menuTitle: "", triggerClose: false};
@@ -55,10 +55,18 @@ export class DscComponent implements OnInit {
       // console.log("setSession", session);
       
       if (session != null) {
-        this.activePart = session.parts[session.active_part];
-        this.selectedSeriesIndex = this.activePart.series.length - 1;
-        this.selectedShotIndex = this.activePart.series[this.selectedSeriesIndex].shots.length - 1;
-        this.disciplinePart = session.discipline.parts.find(part => part.id == this.activePart.part_type);
+        this.activePart = session.sessionParts[session.sessionIndex];
+        
+        if (this.activePart.anzahl > 0) {
+          this.selectedSeriesIndex = this.activePart.serien.length - 1;
+          this.selectedShotIndex = this.activePart.serien[this.selectedSeriesIndex].shots.length - 1;
+        }
+        else {
+          this.selectedSeriesIndex = null;
+          this.selectedShotIndex = null;
+        }
+        
+        this.disciplinePart = session.disziplin.parts[this.activePart.type]
       }
       this.session = session;
       
@@ -66,7 +74,7 @@ export class DscComponent implements OnInit {
     });
     
     dscAPI.config.subscribe(config => {
-      this.dscConfig = config;
+      this.config = config;
     });
 	}
   
@@ -74,7 +82,7 @@ export class DscComponent implements OnInit {
     return this.getCurrentSeries().shots[this.selectedShotIndex];
   }
   getCurrentSeries(){
-    return this.activePart.series[this.selectedSeriesIndex];
+    return this.activePart.serien[this.selectedSeriesIndex];
   }
 
   ngOnInit() {

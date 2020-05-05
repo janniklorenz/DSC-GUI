@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { DisciplinePart, Session } from "../../../classes/session";
+import { DisciplinePart, Part, Session } from "../../../classes/session";
 import { DscApiService } from "../../../dsc-api.service";
 
 @Component({
@@ -21,30 +21,34 @@ export class PartComponent implements OnInit {
     this.openPartModal.emit(state);
   }
 
+  activeDisciplinePart: DisciplinePart;
+  activePart: Part;
   disciplineParts: DisciplinePart[];
   private _session: Session;
   @Input()
   set session(session: Session) {
     this._session = session;
-    this.disciplineParts = session.discipline.parts;
-    session.discipline.parts.forEach(dPart => {
-      let active_part = session.active_part;
-      let part = session.parts[active_part];
-      if (dPart.id == part.part_type) {
-        this.disciplinePart = dPart;
-        return;
-      }
-    });
-  }
-  disciplinePart: DisciplinePart;
-  
-  getDisciplinePart(type: String): DisciplinePart {
-    return this._session.discipline.parts.find(part => part.id == type);
+    this.activePart = session.sessionParts[session.sessionIndex];
+    this.activeDisciplinePart = session.disziplin.parts[this.activePart.type];
+    // this.disciplineParts = session.disziplin.parts;
+    // Object.keys(session.disziplin.parts).forEach(dPart => {
+    //   let active_part = session.active_part;
+    //   let part = session.parts[active_part];
+    //   if (dPart.id == part.part_type) {
+    //     this.disciplinePart = dPart;
+    //     return;
+    //   }
+    // });
   }
   
-  selectPart(partId: number) {
-    
-  }
+  
+  // getDisciplinePart(type: String): DisciplinePart {
+  //   return this._session.discipline.parts.find(part => part.id == type);
+  // }
+  
+  // selectPart(partId: number) {
+  // 
+  // }
   
   
   
