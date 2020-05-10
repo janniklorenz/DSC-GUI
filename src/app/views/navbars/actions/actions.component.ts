@@ -58,5 +58,9 @@ export class ActionsComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  print() {
+    this.dscAPI.print();
+  }
 
 }

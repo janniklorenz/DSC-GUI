@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { Session, Config, Discipline } from "../../../classes/session";
+import { Session, Config, Discipline, ConfigDisciplineGroup } from "../../../classes/session";
 import { DscApiService } from "../../../dsc-api.service";
 
 @Component({
@@ -36,6 +36,22 @@ export class DisciplinComponent implements OnInit {
   @Input() disziplin: Discipline;
   // @Input() disciplines: Discipline[];
   
+  selectedGroup: ConfigDisciplineGroup;
+  selectGroup(group: ConfigDisciplineGroup) {
+    this.selectedGroup = group;
+  }
+  
+  updateSelectedGroup() {
+    if (this.disziplin != null && this.config != null && this._openMenu == false) {
+      // Search for the current selected group
+      this.selectedGroup = this.config.disziplinen.groups.find(group => {
+        return group.disziplinen.find(d => d == this.disziplin._id) != null;
+      });
+    }
+  }
+  
+  
+  
   private menuTitle = "disciplin";
   @Output() openMenuChange = new EventEmitter();
   _openMenu = false;
@@ -51,6 +67,12 @@ export class DisciplinComponent implements OnInit {
       menuTitle: this.menuTitle,
       triggerClose: false,
     });
+    // Update selected in case of change during open menu
+    this.updateSelectedGroup();
+  }
+  
+  ngOnChanges() {
+    this.updateSelectedGroup()
   }
   
   setDiscipline(disciplin: string) {

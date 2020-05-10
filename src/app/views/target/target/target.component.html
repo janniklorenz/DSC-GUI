@@ -1,4 +1,4 @@
-<div id="target_super" style="height: 100%; width: 100%;" (window:resize)="onResize($event)" >
+<div [attr.id]="'target_super'+line" style="height: 100%; width: 100%;" (window:resize)="onResize($event)" >
   <svg [attr.width]="width" [attr.height]="height">
     <symbol [attr.id]="'target'+line" [attr.viewBox]="viewBox">
       <svg:g app-background *ngIf="target" [target]="target"/>

@@ -10,7 +10,7 @@ import { User, Config } from "../../../classes/session";
 export class UserComponent implements OnInit {
 
   @Input() user: User;
-  @Input() confg: Config;
+  @Input() config: Config;
 
   constructor() { }
 

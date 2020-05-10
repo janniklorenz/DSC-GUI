@@ -1,6 +1,6 @@
 <div (click)="toggleMenu()" class="navitem-dropup">
 
-  <div class="navitem button" [ngClass]="{'navitem-active': _openMenu}">
+  <div class="navitem button" [ngClass]="{'buttonSelected': _openMenu}">
     <h4></h4>
     <h3>Aktionen</h3>
     <h4></h4>
@@ -13,13 +13,19 @@
     </div> -->
     <app-new-target class="box button"></app-new-target>
     
-    <div class="box button">
+    <div class="box button" (click)="selectParts()">
+      <h3>Scheiben</h3>
+    </div>
+    
+    <div class="box button" (click)="print()">
       <h3>Drucken</h3>
     </div>
     
-    <div class="box button">
-      <h3>Reset</h3>
-    </div>
+    <!-- <div class="box button" (click)="history()">
+      <h3>Historie</h3>
+    </div> -->
+    
+    
     
   </div>
   

@@ -49,6 +49,7 @@ export class AppComponent {
     else if (event.key=="F7") {
       // Druck
       // alert("F7")
+      this.dscAPI.print();
     }
     else if (event.key=="F8") {
       // Probe Match

@@ -68,7 +68,7 @@ export class TargetComponent implements OnInit {
       if (ua.indexOf('chrome') > -1) { // Chrome
       } else { // Safari
         this.calculateHeight = () => {
-          this.height = document.getElementById("target_super").clientHeight + "px";
+          this.height = document.getElementById("target_super"+this.line).clientHeight + "px";
         }
       }
     }

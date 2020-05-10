@@ -17,6 +17,7 @@ import { NewTargetComponent } from './new-target/new-target.component';
 import { PartComponent } from './part/part.component';
 import { ActionsComponent } from './actions/actions.component';
 
+import { TargetModule } from '../target/target.module';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { ActionsComponent } from './actions/actions.component';
     UserComponent, ClubComponent, DisciplinComponent, NewTargetComponent, PartComponent, ActionsComponent
   ],
   imports: [
-    CommonModule, FlexLayoutModule,
+    CommonModule, FlexLayoutModule, TargetModule,
   ],
   exports: [
     ClockComponent, TimeComponent, ShotsComponent, AverageComponent, SumComponent,

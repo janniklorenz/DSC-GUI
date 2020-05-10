@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { ReplaySubject } from "rxjs";
 
@@ -41,8 +42,15 @@ export class DscApiService {
     return this._config.asObservable();
   }
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParamMap.subscribe(params => {
+      this.auth.key = params.get("key");
+    })
+    
     this.socket = io("http://10.1.0.80:3000");
+    // this.socket = io(environment.serverURL);
+    // this.socket = io("ws://" + location.host + "/socket/");
+    // this.socket = io("ws://" + location.host);
     
     this.socket.on('connect', () => {
       console.log('on connect');
@@ -207,8 +215,12 @@ export class DscApiService {
     });
   }
   print() {
-    this.send({
-      "type": "Print",
+    // default Normal
+    // dateless Ohne Datum
+    // bigImage Größere Scheibe
+    this.socket.emit("print", {
+      auth: this.auth,
+      printTemplate: "default",
     });
   }
   loadData(data) {

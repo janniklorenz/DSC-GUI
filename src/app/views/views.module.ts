@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFittextModule } from 'angular-fittext';
 
 import { NavbarsModule } from './navbars/navbars.module';
 import { InfoModule } from './info/info.module';
@@ -18,6 +19,7 @@ import { TargetModule } from './target/target.module';
     CommonModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+    AngularFittextModule,
     NavbarsModule,
     InfoModule,
     TargetModule,

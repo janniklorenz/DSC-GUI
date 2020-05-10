@@ -157,7 +157,7 @@ export class ConfigDiscipline {
 }
 export class ConfigDisciplineGroup {
   title: string;
-  disziplinen: Discipline[];
+  disziplinen: string[];
 }
 
 export class ConfigLine {
