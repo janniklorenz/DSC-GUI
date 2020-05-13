@@ -18,10 +18,8 @@ export class DscApiService {
 
   private socket: io;
 
-  // TODO
   private auth = {
-    // key: environment.apiKey,
-    key: "123",
+    key: "",
   };
 
   // websocket connection status to dsc server
@@ -47,9 +45,13 @@ export class DscApiService {
       this.auth.key = params.get("key");
     })
     
-    this.socket = io("http://10.1.0.80:3000");
-    // this.socket = io(environment.serverURL);
-    // this.socket = io("ws://" + location.host + "/socket/");
+    if (environment.production) {
+      
+    }
+    // this.socket = io("http://10.1.0.80:3000");
+    this.socket = io(environment.serverURL(location));
+    // this.socket = io("ws://" + location.host + "/");
+    // this.socket = io("ws://" + "10.1.0.224" + "/socket/");
     // this.socket = io("ws://" + location.host);
     
     this.socket.on('connect', () => {

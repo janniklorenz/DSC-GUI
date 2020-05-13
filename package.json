@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "angular-fittext": "^2.1.1",
     "core-js": "^2.6.10",
     "node-sass": "^4.13.0",
     "reconnectingwebsocket": "^1.0.0",

@@ -62,5 +62,9 @@ export class ActionsComponent implements OnInit {
   print() {
     this.dscAPI.print();
   }
+  
+  selectParts() {
+    
+  };
 
 }

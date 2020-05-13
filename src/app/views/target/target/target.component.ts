@@ -36,6 +36,9 @@ export class TargetComponent implements OnInit {
       this.scale = 1;
     }
     this.viewBox = ((-this.radius)/this.scale) + " " + ((-this.radius)/this.scale) + " " + ((2*this.radius)/this.scale) + " " + ((2*this.radius)/this.scale);
+    
+    setTimeout(this.safariFix.bind(this), 100);
+    // this.safariFix();
   }
 
   private calculateScale(series: Serie, target: Target): number {
@@ -62,7 +65,10 @@ export class TargetComponent implements OnInit {
   calculateHeight: () => void = () => {};
   
   ngOnInit() {
-    
+    this.safariFix();
+  }
+  
+  safariFix() {
     var ua = navigator.userAgent.toLowerCase(); 
     if (ua.indexOf('safari') != -1) { 
       if (ua.indexOf('chrome') > -1) { // Chrome
@@ -72,7 +78,6 @@ export class TargetComponent implements OnInit {
         }
       }
     }
-    
   }
   
   ngAfterViewInit() {

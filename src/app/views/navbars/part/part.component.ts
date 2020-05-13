@@ -24,7 +24,7 @@ export class PartComponent implements OnInit {
   activeDisciplinePart: DisciplinePart;
   activePart: Part;
   disciplineParts: DisciplinePart[];
-  private _session: Session;
+  _session: Session;
   @Input()
   set session(session: Session) {
     this._session = session;

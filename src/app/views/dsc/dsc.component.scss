@@ -107,6 +107,8 @@ h1, h2, h3, h4 {
 		
 		color: $main-text;
 		font-weight: 500;
+		white-space: nowrap;
+		padding: 0 0.5vmin 0 0.5vmin;
   }
 	// Navbar top and bottom label
   h4 {
@@ -114,6 +116,7 @@ h1, h2, h3, h4 {
     font-size: 2vmin;
 		color: $detail-text;
 		font-weight: 300;
+		white-space: nowrap;
   }
 	
 	.navitem {
@@ -207,7 +210,7 @@ h1, h2, h3, h4 {
 
 .dropup-content {
  position: absolute;
- bottom: 10vh;
+ bottom: 12vmin;
  padding-bottom: 1vmin;
  z-index: 2;
 }
