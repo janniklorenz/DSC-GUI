@@ -23,25 +23,25 @@
 
   <div fxFlex class="main" fxLayout fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="1vh" fxLayoutWrap="wrap" *ngIf="session">
     <app-target fxFlex fxFlex.xs="auto" class="box" style="height:100%;" [target]="session.disziplin.scheibe" [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex" [has_trial_corner]="disciplinePart.probeEcke" [width]="'100%'" [height]="'100%'"></app-target>
-    <div fxFlex="30" fxFlex.xs="1 0 auto" *ngIf="activePart.anzahl > 0" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1vh">
+    <div style="overflow:scroll;" fxFlex="30" fxFlex.xs="1 0 auto" *ngIf="activePart.anzahl > 0" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1vh">
       <app-current-shot
         class="box contentBox"
         *ngIf="getCurrentShot()"
         fxFlex="none"
         [shot]="getCurrentShot()"
       ></app-current-shot>
-      <div fxLayout fxLayout.xs="row" fxLayout.sm="column" fxLayoutAlign="space-around start" fxLayoutAlign.sm="space-around strech" fxLayoutGap="1vh">
+      <div fxLayout fxLayout.xs="row" fxLayoutAlign="space-around start" fxLayoutGap="1vh">
         <app-current-series
           class="contentBox"
           *ngIf="getCurrentSeries().anzahl > 0"
-          fxFlex="60" fxFlex.xs="50" fxFlex.sm="100"
+          fxFlex="60" fxFlex.xs="50"
           [series]="getCurrentSeries()" [selectedShotIndex]="selectedShotIndex"
           (onChangeSelection)="selectedShotIndex = $event"
         ></app-current-series>
         <app-series-overview
           class="contentBox"
           *ngIf="activePart.anzahl > 0"
-          fxFlex="40 1 auto" fxFlex.xs="50" fxFlex.sm="100"
+          fxFlex="40 1 auto" fxFlex.xs="50"
           [session]="session" [selectedSeriesIndex]="selectedSeriesIndex"
           (onChangeSelection)="selectedSeriesIndex = $event"
         ></app-series-overview>
