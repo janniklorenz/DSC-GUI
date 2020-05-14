@@ -85,11 +85,11 @@ export class DscApiService {
     this.socket.on('setData', (session) => {
       this.currentSession = session;
       this._session.next(session);
-      console.log('setData', session);
+      // console.log('setData', session);
     });
     
     this.socket.on('setConfig', (config) => {
-      console.log('setConfig', config);
+      // console.log('setConfig', config);
       this._config.next(config);
     });
     

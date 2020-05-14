@@ -37,8 +37,7 @@ export class TargetComponent implements OnInit {
     }
     this.viewBox = ((-this.radius)/this.scale) + " " + ((-this.radius)/this.scale) + " " + ((2*this.radius)/this.scale) + " " + ((2*this.radius)/this.scale);
     
-    setTimeout(this.safariFix.bind(this), 100);
-    // this.safariFix();
+    setTimeout(this.safariFix.bind(this), 500);
   }
 
   private calculateScale(series: Serie, target: Target): number {
@@ -81,10 +80,11 @@ export class TargetComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    setTimeout(this.calculateHeight, 0.1);
+    setTimeout(this.calculateHeight, 200);
   }
   
   onResize(event) {
     this.calculateHeight()
+    setTimeout(this.calculateHeight, 500);
   }
 }
