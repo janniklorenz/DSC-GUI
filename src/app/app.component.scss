@@ -1,0 +1,30 @@
+$base-color: #f5f5f5;
+$box-color: #ffffff;
+$border-color: #ebebeb;
+$border-radius: 2.5vmin;
+  
+.noline {
+  height: 100%;
+  
+  .box {
+  	background-color: $box-color;
+  	border: 1px $border-color solid;
+    margin: 1vmin;
+  	overflow: hidden;
+  	border-radius: $border-radius;
+  	box-shadow: 0px 4px 8px 0 rgba(199, 199, 199, 0.2);
+  }
+  
+  .imgContainer {
+    width: 100%;
+    padding: 2vmin;
+    img {
+      max-width: 30vw;
+    }
+  }
+  
+  p, h2 {
+    text-align: center;
+    width: 100%;
+  }
+}

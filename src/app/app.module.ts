@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { DscAPI_Token, DscAPIInterface } from "./views/dsc/api";
     BrowserModule,
     AppRoutingModule,
     ViewsModule,
+    FlexLayoutModule,
   ],
   providers: [
     { provide: DscAPI_Token, useExisting: DscApiService},
