@@ -3,11 +3,10 @@ import { ActivatedRoute } from "@angular/router";
 
 import { ReplaySubject } from "rxjs";
 
-// import ReconnectingWebSocket from "../../node_modules/reconnectingwebsocket/reconnecting-websocket.min.js";
 import * as io from 'socket.io-client';
 
 
-import { Session, Config, DisciplinePart } from "./classes/session";
+import { Session, Config, DisciplinePart } from "./views/dsc/classes/session";
 
 import { environment } from '../environments/environment';
 
@@ -192,28 +191,16 @@ export class DscApiService {
     // 	sessionIndex: sessionIndex,
     // });
   }
-  setSelectedSerie(index) {
-    // this.socket.emit("setSelectedSerie", {
-    // 	auth: this.auth,
-    // 	index: index,
-    // });
-  }
-  setSelectedShot(index) {
-    // this.socket.emit("setSelectedShot", {
-    // 	auth: this.auth,
-    // 	index: index,
-    // });
-  }
   setUser(user){
     // this.socket.emit("setUser", {
     // 	auth: this.auth,
     // 	user: user,
     // });
   }
-  setDisciplin(disziplin) {
+  setDisciplin(disziplinID) {
     this.socket.emit("setDisziplin", {
       auth: this.auth,
-      disziplin: disziplin,
+      disziplin: disziplinID,
     });
   }
   print() {

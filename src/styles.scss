@@ -1,0 +1,24 @@
+$base-color: #f5f5f5;
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  user-select: none;
+  
+  background-color: $base-color;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Enable Scrolling on mobile
+@media only screen and (max-width: 599px) {
+ html {
+   overflow: auto;
+ }
+}

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DscComponent } from './views/dsc/dsc.component';
-import { DscPrintComponent } from './views/dsc-print/dsc-print.component';
+import { DscComponent } from './views/dsc/dsc/dsc.component';
+import { DscPrintComponent } from './views/dsc/dsc-print/dsc-print.component';
 
 const routes: Routes = [
   { path: "", component: DscComponent },

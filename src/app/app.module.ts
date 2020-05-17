@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 
 import { ViewsModule } from './views/views.module';
 
+import { DscApiService } from "./dsc-api.service";
+import { DscAPI_Token, DscAPIInterface } from "./views/dsc/api";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -15,7 +18,9 @@ import { ViewsModule } from './views/views.module';
     AppRoutingModule,
     ViewsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: DscAPI_Token, useExisting: DscApiService},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
