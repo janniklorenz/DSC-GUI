@@ -38,20 +38,18 @@ export class DscApiService {
   get config() {
     return this._config.asObservable();
   }
+  
+  private _status: ReplaySubject<boolean> = new ReplaySubject<boolean>();
+  get status() {
+    return this._status.asObservable();
+  }
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(params => {
       this.auth.key = params.get("key");
     })
     
-    if (environment.production) {
-      
-    }
-    // this.socket = io("http://10.1.0.80:3000");
     this.socket = io(environment.serverURL(location));
-    // this.socket = io("ws://" + location.host + "/");
-    // this.socket = io("ws://" + "10.1.0.224" + "/socket/");
-    // this.socket = io("ws://" + location.host);
     
     this.socket.on('connect', () => {
       console.log('on connect');
@@ -63,8 +61,9 @@ export class DscApiService {
       this._connected.next(false);
     });
     
-    this.socket.on('setStatus', (connected) => {
-      console.log('setStatus', connected);
+    this.socket.on('setStatus', (status) => {
+      console.log('setStatus', status);
+      this._status.next(status);
     });
     
     
