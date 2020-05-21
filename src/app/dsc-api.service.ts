@@ -6,7 +6,7 @@ import { ReplaySubject } from "rxjs";
 import * as io from 'socket.io-client';
 
 
-import { Session, Config, DisciplinePart } from "./views/dsc/classes/session";
+import { Session, Config, DisciplinePart, DSCMessage } from "./views/dsc/classes/session";
 
 import { environment } from '../environments/environment';
 
@@ -43,6 +43,11 @@ export class DscApiService {
   get status() {
     return this._status.asObservable();
   }
+  
+  private _message: ReplaySubject<DSCMessage> = new ReplaySubject<DSCMessage>();
+  get message() {
+    return this._message.asObservable();
+  }
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(params => {
@@ -67,13 +72,15 @@ export class DscApiService {
     });
     
     
-    
-    this.socket.on('showMessage', (message) => {
-      console.log('showMessage', message);
+    this.socket.on('info', (info) => {
+      this._message.next(info);
     });
-    this.socket.on('hideMessage', () => {
-      console.log('hideMessage');
-    });
+    // this.socket.on('showMessage', (message) => {
+    //   console.log('showMessage', message);
+    // });
+    // this.socket.on('hideMessage', () => {
+    //   console.log('hideMessage');
+    // });
     
     
     
